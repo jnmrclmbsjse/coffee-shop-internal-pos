@@ -19,6 +19,7 @@ services:
       - "5544:5432"          # host access for GUI tools; app uses the internal 5432
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./docker/db/init:/docker-entrypoint-initdb.d   # runs once on a fresh volume (creates coffee_pos_test)
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U pos -d coffee_pos"]
       interval: 5s
