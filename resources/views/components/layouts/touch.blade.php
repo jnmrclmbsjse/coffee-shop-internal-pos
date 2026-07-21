@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'Inventory' }} · UCM Coffee Studio</title>
+    <title>{{ $title ?? 'UCM Coffee Studio' }} · UCM Coffee Studio</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="h-full bg-stone-100 text-stone-900 antialiased">
@@ -12,9 +12,15 @@
         {{-- Touch-first top bar: brand + primary inventory navigation. --}}
         <header class="sticky top-0 z-10 border-b border-stone-200 bg-white/95 backdrop-blur">
             <div class="flex items-center gap-4 px-5 py-3">
-                <span class="text-lg font-semibold tracking-tight text-amber-700">UCM&nbsp;Inventory</span>
+                <span class="text-lg font-semibold tracking-tight text-amber-700">UCM&nbsp;Coffee&nbsp;Studio</span>
                 <nav class="flex flex-1 items-center gap-1 overflow-x-auto">
+                    {{-- Shared touch nav across POS + Inventory. Only list routes that exist;
+                         add POS tabs (order taking, cash, close) as sub-phases 3b–3d land. --}}
                     @php($tabs = [
+                        'pos.open' => 'Open Day',
+                        'pos.order' => 'Take Order',
+                        'pos.cash' => 'Cash & Expenses',
+                        'pos.close' => 'Close Day',
                         'inventory.opening' => 'Opening',
                         'inventory.closing' => 'Closing',
                         'inventory.status' => 'Restock',
